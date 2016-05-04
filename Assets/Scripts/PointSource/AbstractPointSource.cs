@@ -1,5 +1,6 @@
 ﻿using Nito;
 using System.Collections;
+using System.Net.NetworkInformation;
 using UnityEngine;
 
 namespace TrailAdvanced.PointSource {
@@ -8,6 +9,7 @@ namespace TrailAdvanced.PointSource {
 		public int maxPoints = 1000;
 
 		protected Deque<Vector3> points;
+		protected int minimumFreeCapacity = 10;
 
 		public Deque<Vector3> GetPoints() {
 			return points;
@@ -15,6 +17,13 @@ namespace TrailAdvanced.PointSource {
 
 		protected virtual void Start() {
 			points = new Deque<Vector3>(maxPoints);
+		}
+
+		protected virtual void Update() {
+			int count = points.Count - (points.Capacity - minimumFreeCapacity);
+			if (count > 0) {
+				points.RemoveRange(0, count);
+			}
 		}
 	}
 }

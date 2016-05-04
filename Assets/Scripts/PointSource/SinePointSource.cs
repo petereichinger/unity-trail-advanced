@@ -12,7 +12,8 @@ namespace TrailAdvanced.PointSource {
 
 		private float _time;
 
-		private void Update() {
+		protected override void Update() {
+			base.Update();
 			float newTime = _time + Time.deltaTime;
 			while (points.Count >= maxPoints + quality) {
 				points.RemoveFromFront();
