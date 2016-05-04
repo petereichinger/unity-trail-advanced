@@ -22,7 +22,7 @@ namespace TrailAdvanced.PointSource {
 		protected virtual void Update() {
 			int count = points.Count - (points.Capacity - minimumFreeCapacity);
 			if (count > 0) {
-				points.RemoveRange(0, count);
+				points.RemoveRange(points.Count - count, count);
 			}
 		}
 	}
